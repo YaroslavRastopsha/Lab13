@@ -115,3 +115,39 @@ def csv_to_json_with_addition(csv_filename, json_filename, additional_data):
 
 # Execution for Mark Holovenko
 csv_to_json_with_addition(updated_csv_filename, final_json_filename, additional_data_3)
+
+# === Roman Uzhyn: Converting final JSON to CSV with added rows ===
+
+# File names for Roman Uzhyn
+final_json_filename = 'final_data.json'
+final_csv_filename = 'final_data.csv'
+
+# Additional data for the final CSV file
+additional_data_4 = [
+    {"id": 8, "name": "Henry", "age": 24},
+    {"id": 9, "name": "Isabel", "age": 30}
+]
+
+# Function to read JSON and write to CSV with additional rows
+def json_to_csv_final_with_addition(json_filename, csv_filename, additional_data):
+    try:
+        # Reading data from JSON file
+        with open(json_filename, mode='r') as json_file:
+            data = json.load(json_file)
+        
+        # Adding new rows to data
+        data.extend(additional_data)
+        
+        # Writing data to new CSV file
+        with open(csv_filename, mode='w', newline='') as csv_file:
+            writer = csv.DictWriter(csv_file, fieldnames=["id", "name", "age"])
+            writer.writeheader()
+            writer.writerows(data)
+        print(f"Data successfully written to {csv_filename} with additional rows")
+    except FileNotFoundError as e:
+        print(f"File not found: {e}")
+    except IOError as e:
+        print(f"Error during file operation: {e}")
+
+# Execution for Roman Uzhyn
+json_to_csv_final_with_addition(final_json_filename, final_csv_filename, additional_data_4)
