@@ -81,3 +81,37 @@ def json_to_csv_with_addition(json_filename, csv_filename, additional_data):
 # Execution for Maksym Hryhorenko
 json_to_csv_with_addition(json_filename, updated_csv_filename, additional_data_2)
 
+# === Mark Holovenko: Converting updated CSV to JSON with added rows ===
+
+# File names for Mark Holovenko
+updated_csv_filename = 'updated_data.csv'
+final_json_filename = 'final_data.json'
+
+# Additional data for the final JSON file
+additional_data_3 = [
+    {"id": 6, "name": "Frank", "age": 26},
+    {"id": 7, "name": "Grace", "age": 28}
+]
+
+# Function to read CSV and write to JSON with additional rows
+def csv_to_json_with_addition(csv_filename, json_filename, additional_data):
+    try:
+        # Reading data from CSV file
+        with open(csv_filename, mode='r') as csv_file:
+            reader = csv.DictReader(csv_file)
+            data = [row for row in reader]
+        
+        # Adding new rows to data
+        data.extend(additional_data)
+        
+        # Writing data to new JSON file
+        with open(json_filename, mode='w') as json_file:
+            json.dump(data, json_file, indent=4)
+        print(f"Data successfully written to {json_filename} with additional rows")
+    except FileNotFoundError as e:
+        print(f"File not found: {e}")
+    except IOError as e:
+        print(f"Error during file operation: {e}")
+
+# Execution for Mark Holovenko
+csv_to_json_with_addition(updated_csv_filename, final_json_filename, additional_data_3)
